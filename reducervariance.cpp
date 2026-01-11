@@ -2,28 +2,32 @@
 #include <sstream>
 #include <string>
 
-int main()
-{
+int main() {
     double sum = 0.0;
     double sum_sq = 0.0;
-    size_t count = 0;
+    std::size_t count = 0;
 
     std::string line;
-    while (std::getline(std::cin, line))
-    {
+    while (std::getline(std::cin, line)) {
         std::stringstream ss(line);
         std::string key;
         double x, x2;
-        size_t c;
+        std::size_t c;
 
         ss >> key >> x >> x2 >> c;
+
         sum += x;
         sum_sq += x2;
         count += c;
     }
 
-    const double mean = sum / count;
-    const double variance = (sum_sq / count) - (mean * mean);
+    if (count == 0) {
+        std::cout << "variance_price\t0\n";
+        return 0;
+    }
 
-    std::cout << "variance_price\t" << variance << std::endl;
+    double mean = sum / count;
+    double variance = (sum_sq / count) - (mean * mean);
+
+    std::cout << "variance_price\t" << variance << "\n";
 }

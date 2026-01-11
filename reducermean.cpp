@@ -1,26 +1,27 @@
 #include <iostream>
-#include <string>
 #include <sstream>
+#include <string>
 
 int main() {
-    std::string key;
     double sum = 0.0;
-    size_t count = 0;
+    std::size_t count = 0;
 
-    while (true) {
-        std::string line;
-        if (!std::getline(std::cin, line))
-            break;
-
+    std::string line;
+    while (std::getline(std::cin, line)) {
         std::stringstream ss(line);
-        std::string k;
+        std::string key;
         double value;
-        size_t c;
+        std::size_t c;
 
-        ss >> k >> value >> c;
+        ss >> key >> value >> c;
         sum += value;
         count += c;
     }
 
-    std::cout << "mean_price\t" << (sum / count) << std::endl;
+    if (count == 0) {
+        std::cout << "mean_price\t0\n";
+        return 0;
+    }
+
+    std::cout << "mean_price\t" << (sum / count) << "\n";
 }
